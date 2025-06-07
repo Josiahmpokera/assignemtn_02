@@ -13,13 +13,7 @@ $conn = getDBConnection();
 $room_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 // Get room details
-$stmt = $conn->prepare("
-    SELECT r.*, GROUP_CONCAT(ra.amenity_id) as amenity_ids
-    FROM rooms r
-    LEFT JOIN room_amenities ra ON r.id = ra.room_id
-    WHERE r.id = ?
-    GROUP BY r.id
-");
+$stmt = $conn->prepare("SELECT * FROM rooms WHERE id = ?");
 $stmt->execute([$room_id]);
 $room = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -27,18 +21,23 @@ if (!$room) {
     redirect('manage_rooms.php');
 }
 
-// Get all amenities for the form
+// Get room amenities
+$stmt = $conn->prepare("SELECT amenity_name FROM room_amenities WHERE room_id = ?");
+$stmt->execute([$room_id]);
+$room_amenities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Get all available amenities
 $stmt = $conn->query("SELECT * FROM amenities ORDER BY name");
 $amenities = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $room_number = sanitize($_POST['room_number']);
-    $room_type = sanitize($_POST['room_type']);
+    $room_number = sanitizeInput($_POST['room_number']);
+    $room_type = sanitizeInput($_POST['room_type']);
     $capacity = (int)$_POST['capacity'];
-    $bed_type = sanitize($_POST['bed_type']);
+    $bed_type = sanitizeInput($_POST['bed_type']);
     $price_per_night = (float)$_POST['price_per_night'];
-    $description = sanitize($_POST['description']);
+    $description = sanitizeInput($_POST['description']);
     $selected_amenities = isset($_POST['amenities']) ? $_POST['amenities'] : [];
     
     // Validate required fields
@@ -77,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$room_id]);
             
             if (!empty($selected_amenities)) {
-                $stmt = $conn->prepare("INSERT INTO room_amenities (room_id, amenity_id) VALUES (?, ?)");
-                foreach ($selected_amenities as $amenity_id) {
-                    $stmt->execute([$room_id, $amenity_id]);
+                $stmt = $conn->prepare("INSERT INTO room_amenities (room_id, amenity_name) VALUES (?, ?)");
+                foreach ($selected_amenities as $amenity) {
+                    $stmt->execute([$room_id, $amenity]);
                 }
             }
             
@@ -87,15 +86,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success_message = "Room updated successfully.";
             
             // Refresh room data
-            $stmt = $conn->prepare("
-                SELECT r.*, GROUP_CONCAT(ra.amenity_id) as amenity_ids
-                FROM rooms r
-                LEFT JOIN room_amenities ra ON r.id = ra.room_id
-                WHERE r.id = ?
-                GROUP BY r.id
-            ");
+            $stmt = $conn->prepare("SELECT * FROM rooms WHERE id = ?");
             $stmt->execute([$room_id]);
             $room = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Refresh room amenities
+            $stmt = $conn->prepare("SELECT amenity_name FROM room_amenities WHERE room_id = ?");
+            $stmt->execute([$room_id]);
+            $room_amenities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
         } catch (Exception $e) {
             $conn->rollBack();
             $errors[] = "An error occurred while updating the room. Please try again.";
@@ -134,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="col-md-6 mb-3">
                                 <label for="room_number" class="form-label">Room Number</label>
                                 <input type="text" class="form-control" id="room_number" name="room_number" 
-                                       value="<?php echo $room['room_number']; ?>" required>
+                                       value="<?php echo htmlspecialchars($room['room_number']); ?>" required>
                             </div>
                             
                             <div class="col-md-6 mb-3">
@@ -182,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         
                         <div class="mb-3">
-                            <label for="price_per_night" class="form-label">Price per Night ($)</label>
+                            <label for="price_per_night" class="form-label">Price per Night (TZS)</label>
                             <input type="number" class="form-control" id="price_per_night" name="price_per_night" 
                                    value="<?php echo $room['price_per_night']; ?>" min="0" step="0.01" required>
                         </div>
@@ -190,24 +189,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="description" name="description" rows="3"><?php 
-                                echo $room['description']; 
+                                echo htmlspecialchars($room['description']); 
                             ?></textarea>
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Amenities</label>
                             <div class="row">
-                                <?php 
-                                $room_amenity_ids = $room['amenity_ids'] ? explode(',', $room['amenity_ids']) : [];
-                                foreach ($amenities as $amenity): 
-                                ?>
+                                <?php foreach ($amenities as $amenity): ?>
                                     <div class="col-md-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" 
                                                    name="amenities[]" 
-                                                   value="<?php echo $amenity['id']; ?>" 
+                                                   value="<?php echo $amenity['name']; ?>" 
                                                    id="amenity<?php echo $amenity['id']; ?>"
-                                                   <?php echo in_array($amenity['id'], $room_amenity_ids) ? 'checked' : ''; ?>>
+                                                   <?php echo in_array($amenity['name'], $room_amenities) ? 'checked' : ''; ?>>
                                             <label class="form-check-label" for="amenity<?php echo $amenity['id']; ?>">
                                                 <?php echo ucfirst($amenity['name']); ?>
                                             </label>

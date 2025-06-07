@@ -1,7 +1,7 @@
     </div>
     <footer class="mt-5">
         <div class="container">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-md-4">
                     <h5 class="text-gold mb-3">Luxury Hotel</h5>
                     <p class="text-cream">Experience the perfect blend of comfort and elegance at our luxury hotel. We provide exceptional service and unforgettable memories.</p>

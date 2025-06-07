@@ -64,7 +64,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="text-center mb-4">Available Rooms</h2>
         
         <?php if (empty($rooms)): ?>
-            <div class="alert alert-info">
+            <div class="alert alert-warning">
                 No rooms available matching your criteria.
             </div>
         <?php else: ?>

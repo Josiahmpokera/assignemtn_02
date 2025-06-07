@@ -12,9 +12,23 @@ $conn = getDBConnection();
 // Handle room deletion
 if (isset($_POST['delete_room'])) {
     $room_id = (int)$_POST['room_id'];
-    $stmt = $conn->prepare("DELETE FROM rooms WHERE id = ?");
-    $stmt->execute([$room_id]);
-    $success_message = "Room deleted successfully.";
+    try {
+        $conn->beginTransaction();
+        
+        // Delete room amenities first
+        $stmt = $conn->prepare("DELETE FROM room_amenities WHERE room_id = ?");
+        $stmt->execute([$room_id]);
+        
+        // Then delete the room
+        $stmt = $conn->prepare("DELETE FROM rooms WHERE id = ?");
+        $stmt->execute([$room_id]);
+        
+        $conn->commit();
+        $success_message = "Room deleted successfully.";
+    } catch (Exception $e) {
+        $conn->rollBack();
+        $error_message = "Failed to delete room. Please try again.";
+    }
 }
 
 // Handle room status update
@@ -22,8 +36,11 @@ if (isset($_POST['update_status'])) {
     $room_id = (int)$_POST['room_id'];
     $new_status = sanitizeInput($_POST['new_status']);
     $stmt = $conn->prepare("UPDATE rooms SET status = ? WHERE id = ?");
-    $stmt->execute([$new_status, $room_id]);
-    $success_message = "Room status updated successfully.";
+    if ($stmt->execute([$new_status, $room_id])) {
+        $success_message = "Room status updated successfully.";
+    } else {
+        $error_message = "Failed to update room status.";
+    }
 }
 
 // Get all rooms with their amenities
@@ -52,6 +69,13 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     <?php endif; ?>
     
+    <?php if (isset($error_message)): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $error_message; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -71,7 +95,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tbody>
                         <?php foreach ($rooms as $room): ?>
                             <tr>
-                                <td><?php echo $room['room_number']; ?></td>
+                                <td><?php echo htmlspecialchars($room['room_number']); ?></td>
                                 <td><?php echo ucfirst($room['room_type']); ?></td>
                                 <td><?php echo $room['capacity']; ?> persons</td>
                                 <td><?php echo ucfirst($room['bed_type']); ?></td>
@@ -129,7 +153,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Are you sure you want to delete Room <?php echo $room['room_number']; ?>?
+                                                    Are you sure you want to delete Room <?php echo htmlspecialchars($room['room_number']); ?>?
                                                     This action cannot be undone.
                                                 </div>
                                                 <div class="modal-footer">
