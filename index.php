@@ -11,15 +11,18 @@ $featured_rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
-        <h1 class="display-4">Welcome to Our Luxury Hotel</h1>
-        <p class="lead">Experience the perfect blend of comfort and elegance</p>
-        <a href="rooms.php" class="btn btn-primary btn-lg">Book Now</a>
+        <h1 class="display-4 text-center pt-5">Welcome to Our Luxury Hotel</h1>
+        <p class="lead text-center">Experience the perfect blend of comfort and elegance</p>
+        <p class="text-center">
+        <a href="rooms.php" class="btn btn-primary btn-lg text-center">Book Now</a>
+        </p>
     </div>
 </section>
 
 <!-- Featured Rooms -->
 <section class="py-5">
     <div class="container">
+    <hr>
         <h2 class="text-center mb-4">Featured Rooms</h2>
         <div class="row">
             <?php foreach ($featured_rooms as $room): ?>
@@ -45,17 +48,17 @@ $featured_rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2 class="text-center mb-4">Why Choose Us</h2>
         <div class="row">
             <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-concierge-bell fa-3x mb-3 text-primary"></i>
+                <i class="fas fa-concierge-bell fa-3x mb-3" style="color: #8B4513"></i>
                 <h4>24/7 Service</h4>
                 <p>Round-the-clock concierge and room service for your convenience</p>
             </div>
             <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-utensils fa-3x mb-3 text-primary"></i>
+                <i class="fas fa-utensils fa-3x mb-3" style="color: #8B4513"></i>
                 <h4>Fine Dining</h4>
                 <p>Experience exquisite cuisine at our award-winning restaurants</p>
             </div>
             <div class="col-md-4 text-center mb-4">
-                <i class="fas fa-spa fa-3x mb-3 text-primary"></i>
+                <i class="fas fa-spa fa-3x mb-3 " style="color: #8B4513"></i>
                 <h4>Spa & Wellness</h4>
                 <p>Relax and rejuvenate at our world-class spa facilities</p>
             </div>
