@@ -1,0 +1,248 @@
+/* Vintage Hotel Theme */
+:root {
+   --primary-color: #8B4513;
+   --secondary-color: #D2691E;
+   --accent-color: #CD853F;
+   --text-color: #4A4A4A;
+   --light-bg: #F5F5DC;
+   --dark-bg: #2C1810;
+   --gold: #DAA520;
+   --cream: #FFF8DC;
+}
+
+body {
+   font-family: 'Arial', serif;
+   background-color: var(--light-bg);
+   color: var(--text-color);
+   line-height: 1.6;
+}
+
+/* Header Styles */
+.navbar {
+   background-color: var(--dark-bg) !important;
+   border-bottom: 3px solid var(--gold);
+}
+
+.navbar-brand {
+   font-family: 'Playfair Display', serif;
+   font-size: 1.8rem;
+   color: var(--gold) !important;
+}
+
+.nav-link {
+   color: var(--cream) !important;
+   font-size: 1.1rem;
+   transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+   color: var(--gold) !important;
+}
+
+/* Card Styles */
+.card {
+   border: none;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   background-color: var(--cream);
+   border-radius: 8px;
+   margin-bottom: 20px;
+}
+
+.card-header {
+   background-color: var(--primary-color);
+   color: var(--cream);
+   border-bottom: 2px solid var(--gold);
+   font-family: 'Playfair Display', serif;
+}
+
+.card-title {
+   color: var(--primary-color);
+   font-family: 'Playfair Display', serif;
+   font-weight: 600;
+}
+
+/* Button Styles */
+.btn-primary {
+   background-color: var(--primary-color);
+   border-color: var(--primary-color);
+   color: var(--cream);
+}
+
+.btn-primary:hover {
+   background-color: var(--secondary-color);
+   border-color: var(--secondary-color);
+}
+
+.btn-success {
+   background-color: var(--secondary-color);
+   border-color: var(--secondary-color);
+}
+
+.btn-success:hover {
+   background-color: var(--accent-color);
+   border-color: var(--accent-color);
+}
+
+/* Form Styles */
+.form-control {
+   border: 1px solid var(--accent-color);
+   border-radius: 4px;
+   padding: 10px;
+   background-color: var(--cream);
+}
+
+.form-control:focus {
+   border-color: var(--primary-color);
+   box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+}
+
+/* Table Styles */
+.table {
+   background-color: var(--cream);
+}
+
+.table thead th {
+
+   color: black;
+   border-bottom: 2px solid var(--gold);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+   background-color: rgba(139, 69, 19, 0.05);
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+   background-color: var(--cream);
+   border: none;
+   border-radius: 8px;
+   transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+   transform: translateY(-5px);
+}
+
+.dashboard-card .card-title {
+   color: black;
+
+   font-size: 1.1rem;
+}
+
+.dashboard-card h2 {
+   color: var(--gold);
+   font-size: 2rem;
+   font-weight: 700;
+}
+
+/* Room Cards */
+.room-card {
+   transition: transform 0.3s ease;
+}
+
+.room-card:hover {
+   transform: translateY(-5px);
+}
+
+.room-price {
+   color: var(--primary-color);
+   font-size: 1.2rem;
+   font-weight: 600;
+}
+
+/* Progress Bars */
+.progress {
+   background-color: var(--cream);
+   border: 1px solid var(--accent-color);
+}
+
+.progress-bar {
+   background-color: var(--primary-color);
+}
+
+/* Badges */
+.badge {
+   padding: 6px 12px;
+   font-size: 0.9rem;
+   border-radius: 4px;
+}
+
+/* Footer */
+footer {
+   background-color: var(--dark-bg);
+   color: var(--cream);
+   padding: 20px 0;
+   border-top: 3px solid var(--gold);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+::-webkit-scrollbar-track {
+   background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+   background: var(--primary-color);
+   border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background: var(--secondary-color);
+}
+
+/* Modal Styles */
+.modal-content {
+   background-color: var(--cream);
+   border: 2px solid var(--gold);
+}
+
+.modal-header {
+   background-color: var(--primary-color);
+   color: var(--cream);
+   border-bottom: 2px solid var(--gold);
+}
+
+.modal-footer {
+   border-top: 1px solid var(--accent-color);
+}
+
+/* Sidebar Styles */
+.sidebar {
+   background-color: var(--dark-bg);
+   border-right: 2px solid var(--gold);
+}
+
+.sidebar .nav-link {
+   color: var(--cream) !important;
+   padding: 12px 20px;
+   border-bottom: 1px solid rgba(255, 248, 220, 0.1);
+}
+
+.sidebar .nav-link:hover {
+   background-color: var(--primary-color);
+   color: var(--gold) !important;
+}
+
+.sidebar .nav-link.active {
+   background-color: var(--primary-color);
+   color: var(--gold) !important;
+   border-left: 4px solid var(--gold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+   .navbar-brand {
+      font-size: 1.5rem;
+   }
+
+   .dashboard-card h2 {
+      font-size: 1.5rem;
+   }
+
+   .card-title {
+      font-size: 1.2rem;
+   }
+}

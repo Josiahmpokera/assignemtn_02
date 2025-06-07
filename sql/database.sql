@@ -76,6 +76,23 @@ CREATE TABLE IF NOT EXISTS reviews (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- System Settings table
+CREATE TABLE IF NOT EXISTS system_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    setting_key VARCHAR(50) UNIQUE NOT NULL,
+    setting_value TEXT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert default system settings
+INSERT INTO system_settings (setting_key, setting_value, description) VALUES
+('currency_code', 'TZS', 'Currency code for the system'),
+('currency_symbol', 'TZS', 'Currency symbol to display'),
+('currency_position', 'before', 'Position of currency symbol (before/after)'),
+('decimal_places', '2', 'Number of decimal places for currency display');
+
 -- Insert default admin user
 INSERT INTO users (username, password, email, full_name, role)
 VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@hotel.com', 'System Administrator', 'admin');

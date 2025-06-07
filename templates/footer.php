@@ -1,38 +1,32 @@
     </div>
-    <footer class="bg-dark text-light mt-5 py-3">
+    <footer class="mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>Contact Us</h5>
-                    <p>
-                        <i class="fas fa-phone"></i> +1 234 567 890<br>
-                        <i class="fas fa-envelope"></i> info@hotel.com<br>
-                        <i class="fas fa-map-marker-alt"></i> 123 Hotel Street, City
-                    </p>
+                    <h5 class="text-gold mb-3">Luxury Hotel</h5>
+                    <p class="text-cream">Experience the perfect blend of comfort and elegance at our luxury hotel. We provide exceptional service and unforgettable memories.</p>
                 </div>
                 <div class="col-md-4">
-                    <h5>Quick Links</h5>
+                    <h5 class="text-gold mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="/hotel-management-system/about.php" class="text-light">About Us</a></li>
-                        <li><a href="/hotel-management-system/rooms.php" class="text-light">Rooms</a></li>
-                        <li><a href="/hotel-management-system/contact.php" class="text-light">Contact</a></li>
-                        <?php if (!isLoggedIn()): ?>
-                            <li><a href="/hotel-management-system/admin/login.php" class="text-light">Admin Login</a></li>
-                        <?php endif; ?>
+                        <li><a href="/hotel-management-system/" class="text-cream">Home</a></li>
+                        <li><a href="/hotel-management-system/rooms.php" class="text-cream">Rooms</a></li>
+                        <li><a href="/hotel-management-system/bookings.php" class="text-cream">Bookings</a></li>
+                        <li><a href="/hotel-management-system/contact.php" class="text-cream">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5>Follow Us</h5>
-                    <div class="social-links">
-                        <a href="#" class="text-light me-2"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-light me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-light me-2"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <h5 class="text-gold mb-3">Contact Us</h5>
+                    <ul class="list-unstyled text-cream">
+                        <li><i class="fas fa-map-marker-alt me-2"></i>123 Luxury Street, City</li>
+                        <li><i class="fas fa-phone me-2"></i>+123 456 7890</li>
+                        <li><i class="fas fa-envelope me-2"></i>info@luxuryhotel.com</li>
+                    </ul>
                 </div>
             </div>
-            <hr class="mt-3">
-            <div class="text-center">
-                <p class="mb-0">&copy; <?php echo date('Y'); ?> Hotel Management System. All rights reserved.</p>
+            <hr class="border-gold">
+            <div class="text-center text-cream">
+                <p class="mb-0">&copy; <?php echo date('Y'); ?> Luxury Hotel. All rights reserved.</p>
             </div>
         </div>
     </footer>

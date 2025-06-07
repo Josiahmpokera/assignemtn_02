@@ -38,62 +38,62 @@ $stmt = $conn->query("
 $room_occupancy = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<div class="container-fluid py-4">
+<div class="container py-4">
     <h2 class="mb-4">Admin Dashboard</h2>
     
     <!-- Statistics Cards -->
     <div class="row mb-4">
         <div class="col-md-3">
-            <div class="card dashboard-card bg-primary text-white">
+            <div class="card dashboard-card text-white">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-title">Total Bookings</h6>
                             <h2 class="mb-0"><?php echo $stats['total_bookings']; ?></h2>
                         </div>
-                        <i class="fas fa-calendar-check fa-2x"></i>
+                    
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="col-md-3">
-            <div class="card dashboard-card bg-success text-white">
+            <div class="card dashboard-card text-white">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-title">Total Revenue</h6>
                             <h2 class="mb-0">TZS <?php echo number_format($stats['total_revenue'], 2); ?></h2>
                         </div>
-                        <i class="fas fa-dollar-sign fa-2x"></i>
+                       
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="col-md-3">
-            <div class="card dashboard-card bg-info text-white">
+            <div class="card dashboard-card text-white">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-title">Total Rooms</h6>
                             <h2 class="mb-0"><?php echo $stats['total_rooms']; ?></h2>
                         </div>
-                        <i class="fas fa-bed fa-2x"></i>
+                        
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="col-md-3">
-            <div class="card dashboard-card bg-warning text-white">
+            <div class="card dashboard-card text-white">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-title">Total Customers</h6>
                             <h2 class="mb-0"><?php echo $stats['total_users']; ?></h2>
                         </div>
-                        <i class="fas fa-users fa-2x"></i>
+                        
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@ $room_occupancy = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 <?php echo ucfirst($booking['status']); ?>
                                             </span>
                                         </td>
-                                        <td>$<?php echo number_format($booking['total_price'], 2); ?></td>
+                                        <td>TZS <?php echo number_format($booking['total_price'], 2); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

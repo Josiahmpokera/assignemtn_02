@@ -37,7 +37,7 @@ $stmt = $conn->query("
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<div class="container-fluid py-4">
+<div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Manage Rooms</h2>
         <a href="add_room.php" class="btn btn-primary">
