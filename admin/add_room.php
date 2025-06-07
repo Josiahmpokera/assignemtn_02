@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container-fluid py-4">
+<div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Add New Room</h2>
         <a href="manage_rooms.php" class="btn btn-secondary">
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="price_per_night" class="form-label">Price per Night ($) *</label>
+                            <label for="price_per_night" class="form-label">Price per Night (TZS) *</label>
                             <input type="number" class="form-control" id="price_per_night" name="price_per_night" 
                                    value="<?php echo isset($price_per_night) ? $price_per_night : ''; ?>" 
                                    min="0" step="0.01" required>

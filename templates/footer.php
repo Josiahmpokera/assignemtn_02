@@ -27,6 +27,11 @@
             <hr class="border-gold">
             <div class="text-center text-cream">
                 <p class="mb-0">&copy; <?php echo date('Y'); ?> Luxury Hotel. All rights reserved.</p>
+                <small class="mt-2 d-block">
+                    <a href="/hotel-management-system/admin/login.php" class="text-cream text-decoration-none">
+                        <i class="fas fa-user-shield me-1"></i>Staff Portal
+                    </a>
+                </small>
             </div>
         </div>
     </footer>
