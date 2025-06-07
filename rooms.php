@@ -80,7 +80,7 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <li><i class="fas fa-user-friends"></i> Capacity: <?php echo $room['capacity']; ?> persons</li>
                                     <li><i class="fas fa-bed"></i> <?php echo ucfirst($room['room_type']); ?> bed</li>
                                 </ul>
-                                <p class="room-price">$<?php echo number_format($room['price_per_night'], 2); ?> per night</p>
+                                <p class="room-price">TZS <?php echo number_format($room['price_per_night'], 2); ?> per night</p>
                                 <a href="room_details.php?id=<?php echo $room['id']; ?>" class="btn btn-primary">View Details</a>
                             </div>
                         </div>

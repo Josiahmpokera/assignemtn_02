@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isLoggedIn()) {
                 <div class="card booking-form">
                     <div class="card-body">
                         <h4 class="card-title">Book This Room</h4>
-                        <p class="room-price mb-4">$<?php echo number_format($room['price_per_night'], 2); ?> per night</p>
+                        <p class="room-price mb-4">TZS <?php echo number_format($room['price_per_night'], 2); ?> per night</p>
                         
                         <?php if ($error): ?>
                             <?php echo displayError($error); ?>
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isLoggedIn()) {
                                 
                                 <div class="mb-3">
                                     <label class="form-label">Total Price</label>
-                                    <h5 id="totalPrice">$0.00</h5>
+                                    <h5 id="totalPrice">TZS 0.00</h5>
                                     <input type="hidden" id="pricePerNight" value="<?php echo $room['price_per_night']; ?>">
                                 </div>
                                 

@@ -71,7 +71,7 @@ $(document).ready(function () {
       if (checkIn && checkOut && pricePerNight) {
          var nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
          var total = nights * pricePerNight;
-         $('#totalPrice').text('$' + total.toFixed(2));
+         $('#totalPrice').text('TZS ' + total.toFixed(2));
       }
    }
 

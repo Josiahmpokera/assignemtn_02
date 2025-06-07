@@ -91,7 +91,7 @@ include 'templates/header.php';
                             <p><strong>Room:</strong> <?php echo ucfirst($booking['room_type']); ?> Room (<?php echo $booking['room_number']; ?>)</p>
                             <p><strong>Check-in:</strong> <?php echo date('F j, Y', strtotime($booking['check_in_date'])); ?></p>
                             <p><strong>Check-out:</strong> <?php echo date('F j, Y', strtotime($booking['check_out_date'])); ?></p>
-                            <p><strong>Total Amount:</strong> $<?php echo number_format($booking['total_price'], 2); ?></p>
+                            <p><strong>Total Amount:</strong> TZS <?php echo number_format($booking['total_price'], 2); ?></p>
                         </div>
                         
                         <form method="POST" action="" class="needs-validation" novalidate>

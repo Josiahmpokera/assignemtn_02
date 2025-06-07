@@ -84,7 +84,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </td>
                                 <td><?php echo date('M j, Y', strtotime($booking['check_in_date'])); ?></td>
                                 <td><?php echo date('M j, Y', strtotime($booking['check_out_date'])); ?></td>
-                                <td>$<?php echo number_format($booking['total_price'], 2); ?></td>
+                                <td>TZS <?php echo number_format($booking['total_price'], 2); ?></td>
                                 <td>
                                     <form method="POST" class="d-inline">
                                         <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
@@ -162,7 +162,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                         <dd class="col-sm-8"><?php echo date('F j, Y', strtotime($booking['check_out_date'])); ?></dd>
                                                         
                                                         <dt class="col-sm-4">Total Price</dt>
-                                                        <dd class="col-sm-8">$<?php echo number_format($booking['total_price'], 2); ?></dd>
+                                                        <dd class="col-sm-8">TZS <?php echo number_format($booking['total_price'], 2); ?></dd>
                                                         
                                                         <dt class="col-sm-4">Status</dt>
                                                         <dd class="col-sm-8">
